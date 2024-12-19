@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+</html>
+<body>
+  <h1><%=title%></h1>
+  <form action="/addMovie" method="POST">
+    <label for="movie_name">Title: </label>
+    <input type="text" name="movie_name" id="movie_name" required />
+    <label for="release_year">Release Year: </label>
+    <input type="number" name="release_year" id="release_year" />
+    <label for="director">Director: </label>
+    <input type="text" name="director" id="director" />
+    <button type="submit">Submit</button>
+  </form>
+</body>

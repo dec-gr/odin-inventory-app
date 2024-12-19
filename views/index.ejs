@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h1><%=title %></h1>
+  </body>
+
+  <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
+  <ul>
+    <li>Name: <%=movie.movie_name%></li>
+    <li>Release Year: <%=movie.release_year%></li>
+    <li>Director: <%=movie.director%></li>
+  </ul>
+  <% }) %> <% } %>
+  <a href="/addMovie">Add Movie</a>
+</html>
