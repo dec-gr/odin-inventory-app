@@ -65,3 +65,12 @@ exports.addGenrePost = (req, res) => {
   db.addGenre({ genre_name });
   res.redirect('/');
 };
+
+exports.getViewMovie = async (req, res) => {
+  const movie_id = req.params.movie_id;
+  console.log(movie_id);
+
+  const movie = await db.getMovieWithDirectorsAndGenreNames(movie_id);
+  console.log(movie);
+  res.render('movies/viewMovie', { title: 'Movie Details', movie: movie });
+};

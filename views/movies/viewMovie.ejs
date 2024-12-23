@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% console.log(movie)%>
     <title><%=title%></title>
   </head>
   <body>
     <h1><%=title %></h1>
-    <a href="/addMovie">Add Movie</a>
-    <a href="/addDirector">Add Director</a>
-    <a href="/addGenre">Add Genre</a>
 
-    <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
     <ul>
-      <li>
-        <a href="/movies/<%=movie.movie_id%>"> Name: <%=movie.movie_name%></a>
-      </li>
+      <li>Name: <%=movie.movie_name%></li>
       <li>Release Year: <%=movie.release_year%></li>
       <li>Director: <%=movie.director_name%></li>
       <% if (movie.genres) { %>
@@ -27,6 +22,5 @@
         <% }) %> <% } %>
       </ul>
     </ul>
-    <% }) %> <% } %>
   </body>
 </html>

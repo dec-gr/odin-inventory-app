@@ -9,5 +9,6 @@ moviesRouter.get('/addDirector', moviesController.addDirectorGet);
 moviesRouter.post('/addDirector', moviesController.addDirectorPost);
 moviesRouter.get('/addGenre', moviesController.addGenreGet);
 moviesRouter.post('/addGenre', moviesController.addGenrePost);
+moviesRouter.get('/movies/:movie_id', moviesController.getViewMovie);
 
 module.exports = moviesRouter;
