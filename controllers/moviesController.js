@@ -69,8 +69,17 @@ exports.addGenrePost = (req, res) => {
 exports.getViewMovie = async (req, res) => {
   const movie_id = req.params.movie_id;
   console.log(movie_id);
-
   const movie = await db.getMovieWithDirectorsAndGenreNames(movie_id);
   console.log(movie);
   res.render('movies/viewMovie', { title: 'Movie Details', movie: movie });
+};
+
+exports.getMoviesByGenre = async (req, res) => {
+  const genre_id = req.params.genre_id;
+  const [genre_name, movies] = await Promise.all([
+    db.getGenre(genre_id),
+    db.getMoviesWithDirectorsFromGenre(genre_id),
+  ]);
+
+  res.render('index', { title: genre_name['genre_name'], movies: movies });
 };
