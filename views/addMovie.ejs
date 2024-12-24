@@ -6,23 +6,17 @@
 </html>
 <body>
   <h1><%=title%></h1>
+  <a href="/">All Movies</a>
+  <a href="/addMovie">Add Movie</a>
+  <a href="/genres">Genres</a>
   <form action="/addMovie" method="POST">
     <label for="movie_name">Title: </label>
     <input type="text" name="movie_name" id="movie_name" required />
     <label for="release_year">Release Year: </label>
     <input type="number" name="release_year" id="release_year" />
 
-    <label for="director_id">Choose a director:</label>
-
-    <select name="director_id" id="director_id" type="number">
-      <% directors.forEach((director) => {%>
-
-      <option value="<%=director.director_id%>">
-        <%=director.director_name%>
-      </option>
-
-      <%})%>
-    </select>
+    <label for="director">Director:</label>
+    <input type="text" name="director" id="directo" />
 
     <label for="genres">Select genres: </label>
     <select name="genres[]" id="genres" multiple>

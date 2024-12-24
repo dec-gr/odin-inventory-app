@@ -5,10 +5,10 @@ require('dotenv').config();
 
 const SQL = `
 
-CREATE TABLE IF NOT EXISTS directors (
-  director_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  director_name TEXT
-);
+-- CREATE TABLE IF NOT EXISTS directors (
+--   director_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+--   director_name TEXT
+-- );
 
 CREATE TABLE IF NOT EXISTS genres (
   genre_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS movies (
     movie_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     movie_name TEXT,
     release_year INT,
-    director_id INT,
-    FOREIGN KEY(director_id) REFERENCES  directors(director_id)
+    director TEXT
+    -- FOREIGN KEY(director_id) REFERENCES  directors(director_id)
 );
 
 CREATE TABLE IF NOT EXISTS movie_genres (
@@ -39,17 +39,17 @@ VALUES
     ('Sci-Fi'),
     ('Animated');
 
-INSERT INTO directors (director_name) 
-VALUES 
-    ('Robert Zemeckis'), 
-    ('Christopher Nolan'), 
-    ('Hayao Miyazaki');
+-- INSERT INTO directors (director_name) 
+-- VALUES 
+--    ('Robert Zemeckis'), 
+--    ('Christopher Nolan'), 
+--    ('Hayao Miyazaki');
 
-INSERT INTO movies (movie_name, release_year, director_id)
+INSERT INTO movies (movie_name, release_year, director)
 VALUES
-    ('Forrest Gump', 1994, 1),
-    ('Interstellar', 2014, 2),
-    ('Spirited Away', 2001, 3);
+    ('Forrest Gump', 1994, 'Robert Zemeckis'),
+    ('Interstellar', 2014, 'Christopher Nolan'),
+    ('Spirited Away', 2001, 'Hayao Miyazaki');
 
 INSERT INTO movie_genres (movie_id, genre_id)
 VALUES

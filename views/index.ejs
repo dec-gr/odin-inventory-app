@@ -5,9 +5,9 @@
   </head>
   <body>
     <h1><%=title %></h1>
+    <a href="/">All Movies</a>
     <a href="/addMovie">Add Movie</a>
-    <a href="/addDirector">Add Director</a>
-    <a href="/addGenre">Add Genre</a>
+    <a href="/genres">Genres</a>
 
     <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
     <ul>
@@ -15,7 +15,7 @@
         <a href="/movies/<%=movie.movie_id%>"> Name: <%=movie.movie_name%></a>
       </li>
       <li>Release Year: <%=movie.release_year%></li>
-      <li>Director: <%=movie.director_name%></li>
+      <li>Director: <%=movie.director%></li>
       <% if (movie.genres) { %>
       <p>Genres:</p>
 
