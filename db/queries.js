@@ -12,10 +12,22 @@ async function getAllGenres() {
 
 async function getGenre(genre_id) {
   const { rows } = await pool.query(
-    `SELECT genre_name FROM genres WHERE genre_id = ($1)`,
+    `SELECT * FROM genres WHERE genre_id = ($1)`,
     [genre_id]
   );
   return rows[0];
+}
+
+async function getMovieGenres(movie_id) {
+  const { rows } = await pool.query(
+    `
+    SELECT genre_id
+    FROM movie_genres
+    WHERE movie_id = ($1);
+    `,
+    [movie_id]
+  );
+  return rows;
 }
 
 async function addMovie({ movie_name, release_year, director }) {
@@ -24,6 +36,28 @@ async function addMovie({ movie_name, release_year, director }) {
     [movie_name, release_year, director]
   );
   return movie_id;
+}
+
+async function deleteMovie(movie_id) {
+  pool.query(`DELETE FROM movies WHERE movie_id = ($1)`, [movie_id]);
+}
+
+async function deleteMovieGenresByMovie(movie_id) {
+  await pool.query(
+    `
+    DELETE FROM movie_genres WHERE movie_id = ($1)`,
+    [movie_id]
+  );
+}
+
+async function updateMovie({ movie_id, movie_name, release_year, director }) {
+  pool.query(
+    `
+    UPDATE movies
+    SET movie_name = ($2), release_year = ($3), director = ($4)
+    WHERE movie_id = ($1)`,
+    [movie_id, movie_name, release_year, director]
+  );
 }
 
 function addMovieGenre({ movie_id, genre_id }) {
@@ -88,16 +122,49 @@ function addGenre({ genre_name }) {
   pool.query(' INSERT INTO genres (genre_name) VALUES ($1) ', [genre_name]);
 }
 
+function updateGenre({ genre_id, genre_name }) {
+  pool.query(
+    ` 
+    UPDATE genres
+    SET genre_name = ($2)
+    WHERE genre_id = ($1)`,
+    [genre_id, genre_name]
+  );
+}
+
+async function deleteMovieGenresByGenre(genre_id) {
+  await pool.query(
+    `
+    DELETE FROM movie_genres WHERE genre_id = ($1)`,
+    [genre_id]
+  );
+}
+
+async function deleteGenre(genre_id) {
+  await pool.query(
+    `
+    DELETE FROM genres WHERE genre_id = ($1)
+    `,
+    [genre_id]
+  );
+}
 module.exports = {
   getAllMovies,
   addMovie,
+  updateMovie,
   getAllGenres,
   getGenre,
+  getMovieGenres,
   addMovieGenre,
   getAllMoviesWithGenreNames,
   addGenre,
   getMovieWithGenreNames,
   getMoviesFromGenre,
+  deleteMovieGenresByMovie,
+  deleteMovie,
+  updateGenre,
+  deleteMovieGenresByGenre,
+  deleteGenre,
 };
 
 `

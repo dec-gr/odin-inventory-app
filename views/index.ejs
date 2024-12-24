@@ -14,6 +14,8 @@
       <li>
         <a href="/movies/<%=movie.movie_id%>"> Name: <%=movie.movie_name%></a>
       </li>
+      <li><a href="/movies/<%=movie.movie_id%>/update">Update</a></li>
+      <li><a href="/movies/<%=movie.movie_id%>/delete">Delete</a></li>
       <li>Release Year: <%=movie.release_year%></li>
       <li>Director: <%=movie.director%></li>
       <% if (movie.genres) { %>

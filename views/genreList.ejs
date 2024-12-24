@@ -13,6 +13,8 @@
       <% genres.forEach((genre) => { %>
       <li>
         <a href="/genres/<%=genre.genre_id%>"><%=genre.genre_name%></a>
+        <a href="/genres/<%=genre.genre_id%>/update">Update</a>
+        <a href="/genres/<%=genre.genre_id%>/delete">Delete</a>
       </li>
 
       <% }) %>
