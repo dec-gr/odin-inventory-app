@@ -2,33 +2,72 @@
 <html>
   <head>
     <title><%=title%></title>
+    <link rel="stylesheet" href="/styles.css" />
+    <% console.log(movies) %>
   </head>
   <body>
-    <h1><%=title %></h1>
-    <a href="/">All Movies</a>
-    <a href="/addMovie">Add Movie</a>
-    <a href="/genres">Genres</a>
+    <div class="appCont">
+      <div class="headerCont">
+        <div class="titleCont">
+          <h1><a href="/">Streamline</a></h1>
+          <p>One place, all your content.</p>
+        </div>
 
-    <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
-    <ul>
-      <li>
-        <a href="/movies/<%=movie.movie_id%>"> Name: <%=movie.movie_name%></a>
-      </li>
-      <li><a href="/movies/<%=movie.movie_id%>/update">Update</a></li>
-      <li><a href="/movies/<%=movie.movie_id%>/delete">Delete</a></li>
-      <li>Release Year: <%=movie.release_year%></li>
-      <li>Director: <%=movie.director%></li>
-      <% if (movie.genres) { %>
-      <p>Genres:</p>
+        <div class="headerBtnContDiv">
+          <div class="headerBtnDiv">
+            <a href="/addMovie">Add Movie</a>
+          </div>
+          <div class="headerBtnDiv">
+            <a href="/genres">Genres</a>
+          </div>
+        </div>
+      </div>
+      <div class="mainCont">
+        <div class="maintContHeader"></div>
+        <h2><%=title%></h2>
+        <div class="movieHolderCont">
+          <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
 
-      <ul>
-        <% movie.genres.forEach((genre) => { %>
+          <div class="gridItem">
+            <div
+              class="movieCard"
+              style="
+                background: url(<%=movie.image_url%>) no-repeat;
+                background-size: 100% 100%;
+              "
+            >
+              <div class="movieTextCont">
+                <ul class="movieTextList">
+                  <div class="movieTitle">
+                    <li>
+                      <a href="/movies/<%=movie.movie_id%>">
+                        <h3><%=movie.movie_name%></h3>
+                      </a>
+                    </li>
+                  </div>
 
-        <li><%=genre%></li>
+                  <div class="movieInfo">
+                    <li>Director: <%=movie.director%></li>
+                    <li>Release Year: <%=movie.release_year%></li>
+                    <% if (movie.genres) { %>
+                    <li>Genres: <%=movie.genres.join(", ")%> <% } %></li>
+                  </div>
+                  <div class="movieBtnCont">
+                    <a href="/movies/<%=movie.movie_id%>/update">
+                      <div class="movieBtn">Update</div>
+                    </a>
 
-        <% }) %> <% } %>
-      </ul>
-    </ul>
-    <% }) %> <% } %>
+                    <a href="/movies/<%=movie.movie_id%>/delete">
+                      <div class="movieBtn">Delete</div>
+                    </a>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <% }) %> <% } %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

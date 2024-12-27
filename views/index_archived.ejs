@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h1><%=title %></h1>
+    <a href="/">All Movies</a>
+    <a href="/addMovie">Add Movie</a>
+    <a href="/genres">Genres</a>
+
+    <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
+    <ul>
+      <li>
+        <a href="/movies/<%=movie.movie_id%>"> Name: <%=movie.movie_name%></a>
+      </li>
+      <li><a href="/movies/<%=movie.movie_id%>/update">Update</a></li>
+      <li><a href="/movies/<%=movie.movie_id%>/delete">Delete</a></li>
+      <li>Release Year: <%=movie.release_year%></li>
+      <li>Director: <%=movie.director%></li>
+      <% if (movie.genres) { %>
+      <p>Genres:</p>
+
+      <ul>
+        <% movie.genres.forEach((genre) => { %>
+
+        <li><%=genre%></li>
+
+        <% }) %> <% } %>
+      </ul>
+    </ul>
+    <% }) %> <% } %>
+  </body>
+</html>

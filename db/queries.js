@@ -30,10 +30,10 @@ async function getMovieGenres(movie_id) {
   return rows;
 }
 
-async function addMovie({ movie_name, release_year, director }) {
+async function addMovie({ movie_name, release_year, director, image_url }) {
   const movie_id = await pool.query(
-    ' INSERT INTO movies (movie_name, release_year, director) VALUES ($1, $2, $3) RETURNING movie_id',
-    [movie_name, release_year, director]
+    ' INSERT INTO movies (movie_name, release_year, director, image_url) VALUES ($1, $2, $3, $4) RETURNING movie_id',
+    [movie_name, release_year, director, image_url]
   );
   return movie_id;
 }
@@ -50,13 +50,19 @@ async function deleteMovieGenresByMovie(movie_id) {
   );
 }
 
-async function updateMovie({ movie_id, movie_name, release_year, director }) {
+async function updateMovie({
+  movie_id,
+  movie_name,
+  release_year,
+  director,
+  image_url,
+}) {
   pool.query(
     `
     UPDATE movies
-    SET movie_name = ($2), release_year = ($3), director = ($4)
+    SET movie_name = ($2), release_year = ($3), director = ($4), image_url = ($5)
     WHERE movie_id = ($1)`,
-    [movie_id, movie_name, release_year, director]
+    [movie_id, movie_name, release_year, director, image_url]
   );
 }
 
@@ -70,7 +76,7 @@ function addMovieGenre({ movie_id, genre_id }) {
 async function getAllMoviesWithGenreNames() {
   console.log('HERE');
   const { rows } = await pool.query(`
-   SELECT m.movie_id, m.movie_name, m.release_year, m.director, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
+   SELECT m.movie_id, m.movie_name, m.release_year, m.director, m.image_url, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
 FROM movies AS m
 LEFT JOIN movie_genres AS mg
 ON m.movie_id = mg.movie_id
@@ -85,7 +91,7 @@ GROUP BY m.movie_id
 async function getMoviesFromGenre(genre_id) {
   const { rows } = await pool.query(
     `
-SELECT m.movie_id, m.movie_name, m.release_year, m.director, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
+SELECT m.movie_id, m.movie_name, m.release_year, m.director, m.image_url, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
 FROM movies AS m
 LEFT JOIN movie_genres AS mg
 ON m.movie_id = mg.movie_id
@@ -103,7 +109,7 @@ GROUP BY m.movie_id
 async function getMovieWithGenreNames(movie_id) {
   const { rows } = await pool.query(
     `
-SELECT m.movie_id, m.movie_name, m.release_year, m.director, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
+SELECT m.movie_id, m.movie_name, m.release_year, m.director, m.image_url, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
 FROM movies AS m
 LEFT JOIN movie_genres AS mg
 ON m.movie_id = mg.movie_id

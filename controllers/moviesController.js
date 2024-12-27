@@ -19,11 +19,13 @@ exports.addMovieGet = async (req, res) => {
 
 exports.addMoviePost = async (req, res) => {
   console.log(req.body);
-  const { movie_name, release_year, director, genres } = req.body;
+  const { movie_name, release_year, director, image_url, genres } = req.body;
+  console.log(image_url);
   const movie_result = await db.addMovie({
     movie_name,
     release_year,
     director,
+    image_url,
   });
   const movie_id = movie_result.rows[0].movie_id;
   console.log('Result');
@@ -51,8 +53,8 @@ exports.updateMovieGet = async (req, res) => {
 
 exports.updateMoviePost = async (req, res) => {
   const movie_id = req.params.movie_id;
-  const { movie_name, release_year, director, genres } = req.body;
-  db.updateMovie({ movie_id, movie_name, release_year, director });
+  const { movie_name, release_year, director, image_url, genres } = req.body;
+  db.updateMovie({ movie_id, movie_name, release_year, director, image_url });
   await db.deleteMovieGenresByMovie(movie_id);
   genres.forEach((genre_id) => {
     console.log({ movie_id, genre_id });

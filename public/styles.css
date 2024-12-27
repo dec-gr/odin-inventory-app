@@ -1,0 +1,115 @@
+div {
+  border: solid red 2px;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.appCont {
+  margin: 0;
+  padding: 1em;
+}
+
+.headerCont {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerBtnContDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.headerBtnDiv {
+  display: flex;
+  font-size: 1em;
+  padding: 10px;
+  width: 5em;
+  border-radius: 30px;
+}
+
+.movieHolderCont {
+  padding: 15px;
+  border-radius: 10px;
+  background-color: grey;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+.gridItem {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.movieCard {
+  align-self: center;
+  height: 20em;
+  width: 12.5em;
+  border-radius: 20px;
+  /* background: url('https://s3.amazonaws.com/nightjarprod/content/uploads/sites/192/2024/02/23130935/n0ybibhJtQ5icDqTp8eRytcIHJx-scaled.jpg'); */
+}
+
+.movieTextCont {
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.648);
+  color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.movieTextCont ul {
+}
+
+.movieTextList {
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0px 10px 0px 10px;
+}
+
+.gridItem:hover .movieTextCont {
+  visibility: visible;
+}
+
+.movieInfo li {
+  margin-bottom: 5px;
+}
+
+.movieBtnCont {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-self: flex-end;
+}
+
+.movieBtn {
+  display: flex;
+  padding: 5px;
+  width: 3em;
+  border-radius: 30px;
+  background-color: rgba(128, 128, 128, 0.766);
+}

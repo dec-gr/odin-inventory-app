@@ -34,6 +34,9 @@
       value="<%=movie.director%>"
     />
 
+    <label for="image">Image url:</label>
+    <input type="text" name="image" id="image" />
+
     <label for="genres">Select genres: </label>
     <select name="genres[]" id="genres" multiple>
       <% genres.forEach((genre) => { %> <% const isSelected =

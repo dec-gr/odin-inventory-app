@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS movies (
     movie_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     movie_name TEXT,
     release_year INT,
-    director TEXT
+    director TEXT,
+    image_url TEXT
     -- FOREIGN KEY(director_id) REFERENCES  directors(director_id)
 );
 
@@ -45,11 +46,11 @@ VALUES
 --    ('Christopher Nolan'), 
 --    ('Hayao Miyazaki');
 
-INSERT INTO movies (movie_name, release_year, director)
+INSERT INTO movies (movie_name, release_year, director, image_url)
 VALUES
-    ('Forrest Gump', 1994, 'Robert Zemeckis'),
-    ('Interstellar', 2014, 'Christopher Nolan'),
-    ('Spirited Away', 2001, 'Hayao Miyazaki');
+    ('Forrest Gump', 1994, 'Robert Zemeckis', 'https://resizing.flixster.com/hqcqFfWf1syt2OrGlbW7LDvfj9Y=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p15829_v_v13_aa.jpg'),
+    ('Interstellar', 2014, 'Christopher Nolan', 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10543523_p_v8_as.jpg'),
+    ('Spirited Away', 2001, 'Hayao Miyazaki' , 'https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg');
 
 INSERT INTO movie_genres (movie_id, genre_id)
 VALUES
