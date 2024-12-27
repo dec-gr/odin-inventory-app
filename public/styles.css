@@ -1,5 +1,5 @@
 div {
-  border: solid red 2px;
+  /* border: solid red 2px; */
 }
 
 a {
@@ -10,6 +10,8 @@ a {
 body {
   padding: 0;
   margin: 0;
+  background-color: rgb(10, 18, 28);
+  color: white;
 }
 
 .appCont {
@@ -41,12 +43,13 @@ body {
   padding: 10px;
   width: 5em;
   border-radius: 30px;
+  border: grey 1px solid;
 }
 
 .movieHolderCont {
   padding: 15px;
   border-radius: 10px;
-  background-color: grey;
+  background-color: rgb(22, 31, 41);
   display: grid;
   /* grid-template-columns: 1fr 1fr 1fr; */
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
@@ -70,7 +73,7 @@ body {
 }
 
 .movieTextCont {
-  visibility: visible;
+  visibility: hidden;
   background-color: rgba(0, 0, 0, 0.648);
   color: white;
   height: 100%;
