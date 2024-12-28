@@ -74,7 +74,6 @@ function addMovieGenre({ movie_id, genre_id }) {
 }
 
 async function getAllMoviesWithGenreNames() {
-  console.log('HERE');
   const { rows } = await pool.query(`
    SELECT m.movie_id, m.movie_name, m.release_year, m.director, m.image_url, array_agg(g.genre_name) FILTER (WHERE g.genre_name IS NOT NULL) AS genres
 FROM movies AS m

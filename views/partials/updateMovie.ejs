@@ -37,8 +37,8 @@
   <label for="genres">Select genres: </label>
   <select name="genres[]" id="genres" multiple>
     <% genres.forEach((genre) => { %> <% const isSelected =
-    movie_genres.includes(genre.genre_id) ? 'selected' : null %> <%
-    console.log(isSelected)%> <% if (isSelected) { %>
+    movie_genres.includes(genre.genre_id) ? 'selected' : null %> <% if
+    (isSelected) { %>
     <option value="<%=genre.genre_id%>" selected><%=genre.genre_name%></option>
 
     <% } else { %>

@@ -56,8 +56,6 @@ exports.addMoviePost = [
   validateMovie,
 
   async (req, res) => {
-    console.log('Starting Validation');
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const genres = await db.getAllGenres();
@@ -69,9 +67,7 @@ exports.addMoviePost = [
         genres: genres,
       });
     }
-    console.log(errors);
     const { movie_name, release_year, director, image_url, genres } = req.body;
-    console.log(image_url);
     const movie_result = await db.addMovie({
       movie_name,
       release_year,
@@ -79,11 +75,8 @@ exports.addMoviePost = [
       image_url,
     });
     const movie_id = movie_result.rows[0].movie_id;
-    console.log('Result');
     if (genres) {
       genres.forEach((genre_id) => {
-        console.log('HERE');
-        console.log({ movie_id, genre_id });
         db.addMovieGenre({ movie_id, genre_id });
       });
     }
@@ -116,7 +109,6 @@ exports.updateMoviePost = async (req, res) => {
     db.updateMovie({ movie_id, movie_name, release_year, director, image_url });
     await db.deleteMovieGenresByMovie(movie_id);
     genres.forEach((genre_id) => {
-      console.log({ movie_id, genre_id });
       db.addMovieGenre({ movie_id, genre_id });
     });
   }
@@ -136,9 +128,7 @@ exports.addGenrePost = (req, res) => {
 
 exports.getViewMovie = async (req, res) => {
   const movie_id = req.params.movie_id;
-  console.log(movie_id);
   const movie = await db.getMovieWithGenreNames(movie_id);
-  console.log(movie);
   res.render('index', {
     partial: 'viewMovie',
     title: 'Movie Details',
@@ -183,7 +173,6 @@ exports.deleteMoviePost = async (req, res) => {
 exports.updateGenreGet = async (req, res) => {
   const genre_id = req.params.genre_id;
   const genre = await db.getGenre(genre_id);
-  console.log(genre);
   res.render('index', {
     partial: 'updateGenre',
     title: 'Update Genre',
