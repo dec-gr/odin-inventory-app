@@ -1,0 +1,22 @@
+<form action="/addMovie" method="POST" class="movieForm">
+  <label for="movie_name">Title: </label>
+  <input type="text" name="movie_name" id="movie_name" required />
+  <label for="release_year">Release Year: </label>
+  <input type="number" name="release_year" id="release_year" />
+
+  <label for="director">Director:</label>
+  <input type="text" name="director" id="director" />
+
+  <label for="image_url">Image url:</label>
+  <input type="text" name="image_url" id="image_url" />
+
+  <label for="genres">Select genres: </label>
+  <select name="genres[]" id="genres" multiple>
+    <% genres.forEach((genre) => { %>
+
+    <option value="<%=genre.genre_id%>"><%=genre.genre_name%></option>
+
+    <% }) %>
+  </select>
+  <button type="submit">Submit</button>
+</form>

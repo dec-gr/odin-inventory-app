@@ -1,0 +1,42 @@
+<div class="movieHolderCont">
+  <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
+
+  <div class="gridItem">
+    <a href="/movies/<%=movie.movie_id%>">
+      <div
+        class="movieCard"
+        style="
+          background: url(<%=movie.image_url%>) no-repeat;
+          background-size: 100% 100%;
+        "
+      >
+        <div class="movieTextCont">
+          <ul class="movieTextList">
+            <div class="movieTitle">
+              <li>
+                <h3><%=movie.movie_name%></h3>
+              </li>
+            </div>
+
+            <div class="movieInfo">
+              <li>Director: <%=movie.director%></li>
+              <li>Release Year: <%=movie.release_year%></li>
+              <% if (movie.genres) { %>
+              <li>Genres: <%=movie.genres.join(", ")%> <% } %></li>
+            </div>
+            <div class="movieBtnCont">
+              <a href="/movies/<%=movie.movie_id%>/update">
+                <div class="movieBtn">Update</div>
+              </a>
+
+              <a href="/movies/<%=movie.movie_id%>/delete">
+                <div class="movieBtn">Delete</div>
+              </a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </a>
+  </div>
+  <% }) %> <% } %>
+</div>

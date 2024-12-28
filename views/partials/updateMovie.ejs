@@ -1,0 +1,52 @@
+<form
+  action="/movies/<%=movie.movie_id%>/update"
+  method="POST"
+  class="movieForm"
+>
+  <label for="movie_name">Title: </label>
+  <input
+    type="text"
+    name="movie_name"
+    id="movie_name"
+    value="<%=movie.movie_name%>"
+  />
+  <label for="release_year">Release Year: </label>
+  <input
+    type="number"
+    name="release_year"
+    id="release_year"
+    value="<%=movie.release_year%>"
+  />
+
+  <label for="director">Director:</label>
+  <input
+    type="text"
+    name="director"
+    id="director"
+    value="<%=movie.director%>"
+  />
+
+  <label for="image_url">Image url:</label>
+  <input
+    type="text"
+    name="image_url"
+    id="image_url"
+    value="<%=movie.image_url%>"
+  />
+
+  <label for="genres">Select genres: </label>
+  <select name="genres[]" id="genres" multiple>
+    <% genres.forEach((genre) => { %> <% const isSelected =
+    movie_genres.includes(genre.genre_id) ? 'selected' : null %> <%
+    console.log(isSelected)%> <% if (isSelected) { %>
+    <option value="<%=genre.genre_id%>" selected><%=genre.genre_name%></option>
+
+    <% } else { %>
+
+    <option value="<%=genre.genre_id%>"><%=genre.genre_name%></option>
+
+    <% } %> <% }) %>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>

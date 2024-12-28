@@ -1,0 +1,17 @@
+<% if (genres) { %>
+<ul class="genreList">
+  <% genres.forEach((genre) => { %>
+  <li class="listItem">
+    <a href="/genres/<%=genre.genre_id%>"><%=genre.genre_name%></a>
+    <div class="genreBtns">
+      <a href="/genres/<%=genre.genre_id%>/update" class="listBtn">Update</a>
+      <a href="/genres/<%=genre.genre_id%>/delete" class="listBtn">Delete</a>
+    </div>
+  </li>
+
+  <% }) %>
+</ul>
+<% } %>
+<a href="/addGenre" class="addGenreLink"
+  ><div class="addGenreBtn">Add Genre</div></a
+>

@@ -3,6 +3,7 @@ const db = require('../db/queries');
 exports.moviesListGet = async (req, res) => {
   const movies = await db.getAllMoviesWithGenreNames();
   res.render('index', {
+    partial: 'movieGrid',
     title: 'Movie List',
     movies: movies,
   });
@@ -11,7 +12,8 @@ exports.moviesListGet = async (req, res) => {
 exports.addMovieGet = async (req, res) => {
   const genres = await db.getAllGenres();
 
-  res.render('addMovie', {
+  res.render('index', {
+    partial: 'addMovie',
     title: 'Add Movie',
     genres: genres,
   });
@@ -43,7 +45,8 @@ exports.updateMovieGet = async (req, res) => {
   const genres = await db.getAllGenres();
   const movie_genres_raw = await db.getMovieGenres(movie_id);
   const movie_genres = movie_genres_raw.map((x) => x.genre_id);
-  res.render('updateMovie', {
+  res.render('index', {
+    partial: 'updateMovie',
     title: 'Update Movie',
     movie: movie,
     genres: genres,
@@ -64,7 +67,7 @@ exports.updateMoviePost = async (req, res) => {
 };
 
 exports.addGenreGet = (req, res) => {
-  res.render('addGenre', { title: 'Add Genre' });
+  res.render('index', { partial: 'addGenre', title: 'Add Genre' });
 };
 
 exports.addGenrePost = (req, res) => {
@@ -78,7 +81,11 @@ exports.getViewMovie = async (req, res) => {
   console.log(movie_id);
   const movie = await db.getMovieWithGenreNames(movie_id);
   console.log(movie);
-  res.render('movies/viewMovie', { title: 'Movie Details', movie: movie });
+  res.render('index', {
+    partial: 'viewMovie',
+    title: 'Movie Details',
+    movie: movie,
+  });
 };
 
 exports.getMoviesByGenre = async (req, res) => {
@@ -88,12 +95,20 @@ exports.getMoviesByGenre = async (req, res) => {
     db.getMoviesFromGenre(genre_id),
   ]);
 
-  res.render('index', { title: genre['genre_name'], movies: movies });
+  res.render('index', {
+    partial: 'movieGrid',
+    title: genre['genre_name'],
+    movies: movies,
+  });
 };
 
 exports.getGenreList = async (req, res) => {
   const genres = await db.getAllGenres();
-  res.render('genreList', { title: 'Genres', genres: genres });
+  res.render('index', {
+    title: 'Genres',
+    genres: genres,
+    partial: 'genreList',
+  });
 };
 
 exports.deleteMovieGet = async (req, res) => {
@@ -107,7 +122,11 @@ exports.updateGenreGet = async (req, res) => {
   const genre_id = req.params.genre_id;
   const genre = await db.getGenre(genre_id);
   console.log(genre);
-  res.render('updateGenre', { title: 'Update Genre', genre: genre });
+  res.render('index', {
+    partial: 'updateGenre',
+    title: 'Update Genre',
+    genre: genre,
+  });
 };
 
 exports.updateGenrePost = async (req, res) => {

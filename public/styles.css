@@ -29,6 +29,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
+}
+
+.titleCont h1 {
+  font-size: 4em;
+  margin-bottom: 10px;
 }
 
 .headerBtnContDiv {
@@ -46,10 +52,17 @@ body {
   border: grey 1px solid;
 }
 
-.movieHolderCont {
+.headerBtnDiv:hover {
+  background-color: rgba(255, 255, 255, 0.24);
+}
+
+.mainContBody {
   padding: 15px;
   border-radius: 10px;
   background-color: rgb(22, 31, 41);
+}
+
+.movieHolderCont {
   display: grid;
   /* grid-template-columns: 1fr 1fr 1fr; */
   grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
@@ -115,4 +128,136 @@ body {
   width: 3em;
   border-radius: 30px;
   background-color: rgba(128, 128, 128, 0.766);
+}
+
+/* Add Movie */
+
+.movieForm {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.movieForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.movieForm input[type='text'],
+.movieForm input[type='number'],
+.movieForm select {
+  width: 100%;
+  padding: 5px 2px 5px 2px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.movieForm select[multiple] {
+  height: 100px;
+}
+
+.movieForm button[type='submit'] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.movieForm button[type='submit']:hover {
+  background-color: #45a049;
+}
+
+/* Genre List */
+.genreList {
+  list-style: none;
+  padding: 0;
+  font-size: 1.05em;
+}
+
+.listItem {
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listItem > a:first-child {
+  margin-right: 40px;
+  text-decoration: none;
+  color: #007bff;
+  font-size: larger;
+}
+
+.listItem > a:first-child:hover {
+  text-decoration: underline;
+}
+
+.genreBtns {
+  display: flex;
+  gap: 10px;
+}
+
+.listBtn {
+  border: 1px white solid;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.listBtn:hover {
+  background-color: rgba(255, 255, 255, 0.196);
+}
+
+.addGenreLink {
+  display: flex;
+  width: fit-content;
+}
+
+.addGenreBtn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.addGenreBtn:hover {
+  background-color: #45a049;
+}
+
+/* View Movie */
+
+.viewMovieCont {
+  display: flex;
+  /* justify-content: space-around; */
+  justify-self: center;
+  gap: 40px;
+}
+
+.viewMovieCont > .movieCard {
+  height: 30em;
+  width: 17.5em;
+}
+
+.viewMovieTextList {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 10px 10px 10px;
+}
+
+.viewMovieCont li {
+  font-size: large;
 }

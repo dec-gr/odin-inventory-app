@@ -3,7 +3,6 @@
   <head>
     <title><%=title%></title>
     <link rel="stylesheet" href="/styles.css" />
-    <% console.log(movies) %>
   </head>
   <body>
     <div class="appCont">
@@ -14,58 +13,17 @@
         </div>
 
         <div class="headerBtnContDiv">
-          <div class="headerBtnDiv">
-            <a href="/addMovie">Add Movie</a>
-          </div>
-          <div class="headerBtnDiv">
-            <a href="/genres">Genres</a>
-          </div>
+          <a href="/"><div class="headerBtnDiv">All Movies</div></a>
+          <a href="/addMovie"><div class="headerBtnDiv">Add Movie</div></a>
+
+          <a href="/genres"><div class="headerBtnDiv">Genres</div></a>
         </div>
       </div>
       <div class="mainCont">
-        <div class="maintContHeader"></div>
+        <div class="mainContHeader"></div>
         <h2><%=title%></h2>
-        <div class="movieHolderCont">
-          <% if (locals.movies) { %> <% movies.forEach((movie) => { %>
-
-          <div class="gridItem">
-            <div
-              class="movieCard"
-              style="
-                background: url(<%=movie.image_url%>) no-repeat;
-                background-size: 100% 100%;
-              "
-            >
-              <div class="movieTextCont">
-                <ul class="movieTextList">
-                  <div class="movieTitle">
-                    <li>
-                      <a href="/movies/<%=movie.movie_id%>">
-                        <h3><%=movie.movie_name%></h3>
-                      </a>
-                    </li>
-                  </div>
-
-                  <div class="movieInfo">
-                    <li>Director: <%=movie.director%></li>
-                    <li>Release Year: <%=movie.release_year%></li>
-                    <% if (movie.genres) { %>
-                    <li>Genres: <%=movie.genres.join(", ")%> <% } %></li>
-                  </div>
-                  <div class="movieBtnCont">
-                    <a href="/movies/<%=movie.movie_id%>/update">
-                      <div class="movieBtn">Update</div>
-                    </a>
-
-                    <a href="/movies/<%=movie.movie_id%>/delete">
-                      <div class="movieBtn">Delete</div>
-                    </a>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <% }) %> <% } %>
+        <div class="mainContBody">
+          <%-include("partials/" + partial + ".ejs")%>
         </div>
       </div>
     </div>
