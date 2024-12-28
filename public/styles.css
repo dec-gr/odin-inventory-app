@@ -329,3 +329,7 @@ ul.errorList li {
   border-radius: 3px;
   cursor: pointer;
 }
+
+.passwordUpdateCont {
+  margin-bottom: 15px;
+}
