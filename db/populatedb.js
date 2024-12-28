@@ -5,10 +5,6 @@ require('dotenv').config();
 
 const SQL = `
 
--- CREATE TABLE IF NOT EXISTS directors (
---   director_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
---   director_name TEXT
--- );
 
 CREATE TABLE IF NOT EXISTS genres (
   genre_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -23,7 +19,6 @@ CREATE TABLE IF NOT EXISTS movies (
     release_year INT,
     director TEXT,
     image_url TEXT
-    -- FOREIGN KEY(director_id) REFERENCES  directors(director_id)
 );
 
 CREATE TABLE IF NOT EXISTS movie_genres (
@@ -40,11 +35,7 @@ VALUES
     ('Sci-Fi'),
     ('Animated');
 
--- INSERT INTO directors (director_name) 
--- VALUES 
---    ('Robert Zemeckis'), 
---    ('Christopher Nolan'), 
---    ('Hayao Miyazaki');
+
 
 INSERT INTO movies (movie_name, release_year, director, image_url)
 VALUES

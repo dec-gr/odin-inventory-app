@@ -1,3 +1,5 @@
+<% function hello(){console.log("hello")} %>
+
 <form
   action="/genres/<%=genre.genre_id%>/update"
   method="POST"
@@ -10,5 +12,11 @@
     id="genre_name"
     value="<%=genre.genre_name%>"
   />
+
+  <div class="passwordCont">
+    <label for="password">Password:</label>
+    <input type="text" name="password" id="password" />
+  </div>
+
   <button type="submit">Add</button>
 </form>

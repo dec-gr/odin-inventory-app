@@ -1,3 +1,16 @@
+<div class="deleteModal" id="deleteModal">
+  <div class="modalContent">
+    <h2>Enter password to continue</h2>
+    <form action="" method="POST" id="deleteForm">
+      <div class="passwordCont">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
 <% if (genres) { %>
 <ul class="genreList">
   <% genres.forEach((genre) => { %>
@@ -5,7 +18,8 @@
     <a href="/genres/<%=genre.genre_id%>"><%=genre.genre_name%></a>
     <div class="genreBtns">
       <a href="/genres/<%=genre.genre_id%>/update" class="listBtn">Update</a>
-      <a href="/genres/<%=genre.genre_id%>/delete" class="listBtn">Delete</a>
+
+      <a class="listBtn" onclick="openModal('<%=genre.genre_id%>')">Delete</a>
     </div>
   </li>
 
@@ -15,3 +29,10 @@
 <a href="/addGenre" class="addGenreLink"
   ><div class="addGenreBtn">Add Genre</div></a
 >
+
+<script>
+  function openModal(genre) {
+    document.getElementById('deleteModal').style.display = 'block';
+    document.getElementById('deleteForm').action = `/genres/${genre}/delete`;
+  }
+</script>

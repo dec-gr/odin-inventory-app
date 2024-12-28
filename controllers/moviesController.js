@@ -109,13 +109,18 @@ exports.updateMovieGet = async (req, res) => {
 
 exports.updateMoviePost = async (req, res) => {
   const movie_id = req.params.movie_id;
-  const { movie_name, release_year, director, image_url, genres } = req.body;
-  db.updateMovie({ movie_id, movie_name, release_year, director, image_url });
-  await db.deleteMovieGenresByMovie(movie_id);
-  genres.forEach((genre_id) => {
-    console.log({ movie_id, genre_id });
-    db.addMovieGenre({ movie_id, genre_id });
-  });
+  const { movie_name, release_year, director, image_url, genres, password } =
+    req.body;
+
+  if (password == process.env.PASSWORD) {
+    db.updateMovie({ movie_id, movie_name, release_year, director, image_url });
+    await db.deleteMovieGenresByMovie(movie_id);
+    genres.forEach((genre_id) => {
+      console.log({ movie_id, genre_id });
+      db.addMovieGenre({ movie_id, genre_id });
+    });
+  }
+
   res.redirect('/');
 };
 
@@ -164,10 +169,14 @@ exports.getGenreList = async (req, res) => {
   });
 };
 
-exports.deleteMovieGet = async (req, res) => {
+exports.deleteMoviePost = async (req, res) => {
+  const { password } = req.body;
   const movie_id = req.params.movie_id;
-  await db.deleteMovieGenresByMovie(movie_id);
-  await db.deleteMovie(movie_id);
+  if (password == process.env.PASSWORD) {
+    await db.deleteMovieGenresByMovie(movie_id);
+    await db.deleteMovie(movie_id);
+  }
+
   res.redirect('/');
 };
 
@@ -184,14 +193,21 @@ exports.updateGenreGet = async (req, res) => {
 
 exports.updateGenrePost = async (req, res) => {
   const genre_id = req.params.genre_id;
-  const { genre_name } = req.body;
-  await db.updateGenre({ genre_id, genre_name });
+  const { genre_name, password } = req.body;
+  if (password == process.env.PASSWORD) {
+    await db.updateGenre({ genre_id, genre_name });
+  }
+
   res.redirect('/genres');
 };
 
-exports.deleteGenreGet = async (req, res) => {
+exports.deleteGenrePost = async (req, res) => {
+  const { password } = req.body;
   const genre_id = req.params.genre_id;
-  await db.deleteMovieGenresByGenre(genre_id);
-  await db.deleteGenre(genre_id);
+  if (password === process.env.PASSWORD) {
+    await db.deleteMovieGenresByGenre(genre_id);
+    await db.deleteGenre(genre_id);
+  }
+
   res.redirect('/genres');
 };

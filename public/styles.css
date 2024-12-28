@@ -279,3 +279,53 @@ ul.errorList li {
   color: #dc3545; /* Bootstrap danger color */
   margin-bottom: 5px;
 }
+
+/*     Modal */
+
+/* .genreDeleteModal {
+  display: none;
+} */
+
+.deleteModal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  z-index: 9999; /* Ensure it appears on top */
+}
+
+.modalContent {
+  border: white solid 1px;
+  background-color: black;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 15% auto; /* Center vertically */
+  width: 300px; /* Adjust width as needed */
+}
+
+.passwordCont {
+  margin-bottom: 15px;
+}
+
+.passwordCont label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.passwordCont input[type='text'] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.deleteModal button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}

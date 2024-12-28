@@ -11,12 +11,12 @@ moviesRouter.get('/movies/:movie_id', moviesController.getViewMovie);
 moviesRouter.get('/movies/:movie_id/update', moviesController.updateMovieGet);
 moviesRouter.post('/movies/:movie_id/update', moviesController.updateMoviePost);
 
-moviesRouter.get('/movies/:movie_id/delete', moviesController.deleteMovieGet);
+moviesRouter.post('/movies/:movie_id/delete', moviesController.deleteMoviePost);
 
 moviesRouter.get('/genres/:genre_id', moviesController.getMoviesByGenre);
 moviesRouter.get('/genres/:genre_id/update', moviesController.updateGenreGet);
 moviesRouter.post('/genres/:genre_id/update', moviesController.updateGenrePost);
-moviesRouter.get('/genres/:genre_id/delete', moviesController.deleteGenreGet);
+moviesRouter.post('/genres/:genre_id/delete', moviesController.deleteGenrePost);
 
 moviesRouter.get('/genres', moviesController.getGenreList);
 

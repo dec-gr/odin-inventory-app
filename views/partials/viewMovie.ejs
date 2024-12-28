@@ -1,3 +1,16 @@
+<div class="deleteModal" id="deleteModal">
+  <div class="modalContent">
+    <h2>Enter password to continue</h2>
+    <form action="" method="POST" id="deleteForm">
+      <div class="passwordCont">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
 <div class="viewMovieCont">
   <div
     class="movieCard"
@@ -26,10 +39,17 @@
           <div class="movieBtn">Update</div>
         </a>
 
-        <a href="/movies/<%=movie.movie_id%>/delete">
+        <a onclick="openModal('<%=movie.movie_id%>')">
           <div class="movieBtn">Delete</div>
         </a>
       </div>
     </ul>
   </div>
 </div>
+
+<script>
+  function openModal(movie_id) {
+    document.getElementById('deleteModal').style.display = 'block';
+    document.getElementById('deleteForm').action = `/movies/${movie_id}/delete`;
+  }
+</script>
