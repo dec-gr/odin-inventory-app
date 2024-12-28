@@ -130,6 +130,10 @@ body {
   background-color: rgba(128, 128, 128, 0.766);
 }
 
+.movieBtn:hover {
+  background-color: rgba(255, 255, 255, 0.661);
+}
+
 /* Add Movie */
 
 .movieForm {
@@ -260,4 +264,18 @@ body {
 
 .viewMovieCont li {
   font-size: large;
+}
+
+/* Errors  */
+
+ul.errorList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+ul.errorList li {
+  color: #dc3545; /* Bootstrap danger color */
+  margin-bottom: 5px;
 }

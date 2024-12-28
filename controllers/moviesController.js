@@ -1,4 +1,37 @@
 const db = require('../db/queries');
+const { body, validationResult } = require('express-validator');
+const isImageURL = require('image-url-validator').default;
+
+const yearIntErr = 'must be an integer';
+const yearLengthErr = 'must be 4 digits long';
+const yearRangeErr = 'must be between 1800 and the current year';
+
+const imageValidUrlErr = 'must be a valid URL';
+const imageValidImageUrlErr = 'must be a valid URL of an image';
+
+const validateMovie = [
+  body('release_year')
+    .trim()
+    .isInt()
+    .withMessage(`Release year ${yearIntErr}`)
+    .isLength({ min: 4, max: 4 })
+    .withMessage(`Release year ${yearLengthErr}`)
+    .custom((value) => {
+      return value >= 1800 && value <= new Date().getFullYear();
+    })
+    .withMessage(`Release year ${yearRangeErr}`),
+
+  body('image_url')
+    .isURL()
+    .withMessage(`Image URLLL ${imageValidUrlErr}`)
+    .custom(async (value) => {
+      const isValidUrl = await isImageURL(value);
+      if (!isValidUrl) {
+        return Promise.reject();
+      }
+    })
+    .withMessage(`Image URL ${imageValidImageUrlErr}`),
+];
 
 exports.moviesListGet = async (req, res) => {
   const movies = await db.getAllMoviesWithGenreNames();
@@ -19,25 +52,45 @@ exports.addMovieGet = async (req, res) => {
   });
 };
 
-exports.addMoviePost = async (req, res) => {
-  console.log(req.body);
-  const { movie_name, release_year, director, image_url, genres } = req.body;
-  console.log(image_url);
-  const movie_result = await db.addMovie({
-    movie_name,
-    release_year,
-    director,
-    image_url,
-  });
-  const movie_id = movie_result.rows[0].movie_id;
-  console.log('Result');
-  genres.forEach((genre_id) => {
-    console.log('HERE');
-    console.log({ movie_id, genre_id });
-    db.addMovieGenre({ movie_id, genre_id });
-  });
-  res.redirect('/');
-};
+exports.addMoviePost = [
+  validateMovie,
+
+  async (req, res) => {
+    console.log('Starting Validation');
+    console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const genres = await db.getAllGenres();
+
+      return res.status(400).render('index', {
+        errors: errors.array(),
+        partial: 'addMovie',
+        title: 'Add Movie',
+        genres: genres,
+      });
+    }
+    console.log(errors);
+    const { movie_name, release_year, director, image_url, genres } = req.body;
+    console.log(image_url);
+    const movie_result = await db.addMovie({
+      movie_name,
+      release_year,
+      director,
+      image_url,
+    });
+    const movie_id = movie_result.rows[0].movie_id;
+    console.log('Result');
+    if (genres) {
+      genres.forEach((genre_id) => {
+        console.log('HERE');
+        console.log({ movie_id, genre_id });
+        db.addMovieGenre({ movie_id, genre_id });
+      });
+    }
+
+    res.redirect('/');
+  },
+];
 
 exports.updateMovieGet = async (req, res) => {
   const movie_id = req.params.movie_id;
